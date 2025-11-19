@@ -1,5 +1,5 @@
 {
-  "Name": "RPA_AutoFeedbackClassification",
+  "Name": "RPA_AutoFeedbackClassification_RE",
   "ProjectType": "Process",
   "Description": "AI모델을 활용하여 사용자 피드백을 자동으로 분류해 주는 프로세스",
   "MainFile": "Main.xaml"

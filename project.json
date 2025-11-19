@@ -1,5 +1,5 @@
 {
-  "name": "RPA_AutoFeedbackClassification",
+  "name": "RPA_AutoFeedbackClassification_RE",
   "projectId": "4d122f37-8fb4-44ea-b29a-d30028696785",
   "description": "AI모델을 활용하여 사용자 피드백을 자동으로 분류해 주는 프로세스",
   "main": "Main.xaml",
