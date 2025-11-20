@@ -61,6 +61,8 @@
       <x:String>System.ComponentModel</x:String>
       <x:String>System.Xml.Serialization</x:String>
       <x:String>UiPath.IntegrationService.Activities.SWEntities.C3696A586BD_categorize_Create.Bundle</x:String>
+      <x:String>UiPath.IntegrationService.Activities.SWEntities.C3696A586BD_summarise_Create.Bundle</x:String>
+      <x:String>UiPath.IntegrationService.Activities.SWEntities.C3696A586BD_generateEmail_Create.Bundle</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -117,9 +119,11 @@
       <AssemblyReference>System.Private.Xml</AssemblyReference>
       <AssemblyReference>System.Data.SqlClient</AssemblyReference>
       <AssemblyReference>C3696A586BD_categori.PY6eQ1mADfS1ZZeMa2wTTKo</AssemblyReference>
+      <AssemblyReference>C3696A586BD_summaris.GUZAbhij2B1cQRvY41rSzz3</AssemblyReference>
+      <AssemblyReference>C3696A586BD_generate.r9dnj1f0usD1wm0cc4HTxhu3</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="_01_DT준비" sap:VirtualizedContainerService.HintSize="686,900.5" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="_01_DT준비" sap:VirtualizedContainerService.HintSize="684,900.5" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>

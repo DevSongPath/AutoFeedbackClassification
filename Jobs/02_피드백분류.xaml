@@ -47,6 +47,8 @@
       <x:String>UiPath.Platform.Activities</x:String>
       <x:String>UiPath.IntegrationService.Activities.SWEntities.C3696A586BD_categorize_Create.Bundle</x:String>
       <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.IntegrationService.Activities.SWEntities.C3696A586BD_summarise_Create.Bundle</x:String>
+      <x:String>UiPath.IntegrationService.Activities.SWEntities.C3696A586BD_generateEmail_Create.Bundle</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -102,9 +104,11 @@
       <AssemblyReference>UiPath.Platform</AssemblyReference>
       <AssemblyReference>C3696A586BD_categori.PY6eQ1mADfS1ZZeMa2wTTKo</AssemblyReference>
       <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>C3696A586BD_summaris.GUZAbhij2B1cQRvY41rSzz3</AssemblyReference>
+      <AssemblyReference>C3696A586BD_generate.r9dnj1f0usD1wm0cc4HTxhu3</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="_02_피드백분류" sap:VirtualizedContainerService.HintSize="686,852" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="_02_피드백분류" sap:VirtualizedContainerService.HintSize="684,1421" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="strCategory" />
       <Variable x:TypeArguments="x:String" Name="strFeedback" />
@@ -115,10 +119,10 @@
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="512,176" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;***피드백분류 시작***&quot;]" />
-    <Sequence sap2010:Annotation.AnnotationText="AI 기반 피드백 자동 분류" DisplayName="피드백 분류 | Sequence" sap:VirtualizedContainerService.HintSize="512,88" sap2010:WorkflowViewState.IdRef="Sequence_2">
+    <Sequence sap2010:Annotation.AnnotationText="AI 기반 피드백 자동 분류" DisplayName="피드백 분류 | Sequence" sap:VirtualizedContainerService.HintSize="512,657" sap2010:WorkflowViewState.IdRef="Sequence_2">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
@@ -270,6 +274,7 @@
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="478,171.5" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">

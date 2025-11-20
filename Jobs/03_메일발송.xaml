@@ -1,4 +1,13 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="_03_메일발송" VisualBasic.Settings="{x:Null}" sap2010:WorkflowViewState.IdRef="_03_메일발송_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="_03_메일발송" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:isactr="http://schemas.uipath.com/workflow/integration-service-activities/isactr" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.ComponentModel;assembly=System.ComponentModel.TypeConverter" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ss="clr-namespace:System.Security;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uiascb="clr-namespace:UiPath.IntegrationService.Activities.SWEntities.C3696A586BD_summarise_Create.Bundle;assembly=C3696A586BD_summaris.GUZAbhij2B1cQRvY41rSzz3" xmlns:uiascb1="clr-namespace:UiPath.IntegrationService.Activities.SWEntities.C3696A586BD_generateEmail_Create.Bundle;assembly=C3696A586BD_generate.r9dnj1f0usD1wm0cc4HTxhu3" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_strCategory" Type="InArgument(x:String)" />
+    <x:Property Name="in_TransactionItem" Type="InArgument(sd:DataRow)" />
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>_03_메일발송_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
       <x:String>System.Activities</x:String>
@@ -25,6 +34,24 @@
       <x:String>System.Windows.Markup</x:String>
       <x:String>GlobalVariablesNamespace</x:String>
       <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>UiPath.IntegrationService.Activities.SWEntities.C3696A586BD_categorize_Create.Bundle</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>UiPath.IntegrationService.Activities.Runtime.Models.FilterBuilder</x:String>
+      <x:String>UiPath.IntegrationService.Activities.Runtime.Models</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>UiPath.IntegrationService.Activities.Runtime.Helpers.TypeDetailsCustomization</x:String>
+      <x:String>UiPath.IntegrationService.Activities.Runtime.Activities</x:String>
+      <x:String>UiPath.Platform.Activities</x:String>
+      <x:String>UiPath.IntegrationService.Activities.SWEntities.C3696A586BD_summarise_Create.Bundle</x:String>
+      <x:String>UiPath.IntegrationService.Activities.SWEntities.C3696A586BD_generateEmail_Create.Bundle</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>UiPath.Mail</x:String>
+      <x:String>UiPath.Mail.SMTP.Activities</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.Mail.Activities</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -50,13 +77,291 @@
       <AssemblyReference>System.Xml.Linq</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities</AssemblyReference>
       <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>C3696A586BD_categori.PY6eQ1mADfS1ZZeMa2wTTKo</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Reflection.MetadataLoadContext</AssemblyReference>
+      <AssemblyReference>NPOI.Core</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>UiPath.IntegrationService.Activities.Runtime</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>C3696A586BD_summaris.GUZAbhij2B1cQRvY41rSzz3</AssemblyReference>
+      <AssemblyReference>C3696A586BD_generate.r9dnj1f0usD1wm0cc4HTxhu3</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Testing.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities.Design</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="_03_메일발송" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="_03_메일발송" sap:VirtualizedContainerService.HintSize="684,3077.5" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="strSubIn" />
+      <Variable x:TypeArguments="x:String" Name="strID" />
+      <Variable x:TypeArguments="ss:SecureString" Name="sstrPW" />
+      <Variable x:TypeArguments="x:String" Name="strEmailBody" />
+      <Variable x:TypeArguments="x:String" Name="strSummary" />
+    </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="520,176" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[in_strCategory+&quot; 접수!!! 메일 발송 시작&quot;]" />
+    <Sequence sap2010:Annotation.AnnotationText="&quot;불만&quot; 또는 &quot;문의&quot;로 분류된 경우 ,&#xD;&#xA;AI 기반 피드백 요약 및 AI 기반 메일 본문 생성 후 메일 발송" sap:VirtualizedContainerService.HintSize="520,2711.5" sap2010:WorkflowViewState.IdRef="Sequence_4">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <Sequence DisplayName="메일 본문 생성 | Sequence" sap:VirtualizedContainerService.HintSize="486,1157.5" sap2010:WorkflowViewState.IdRef="Sequence_2">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <isactr:ConnectorActivity sap2010:Annotation.AnnotationText="strSummary = 피드백 요약 결과" Configuration="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" ConnectionId="4c57a977-b9d1-4acd-9370-383696a586bd" DisplayName="Summarize Text" sap:VirtualizedContainerService.HintSize="416,353.5" sap2010:WorkflowViewState.IdRef="ConnectorActivity_1" UiPathActivityTypeId="d82ffa74-9757-317d-8c48-1a3a1b4be976">
+          <isactr:ConnectorActivity.FieldObjects>
+            <isactr:FieldObject Name="prompt" Type="FieldArgument">
+              <isactr:FieldObject.Value>
+                <InArgument x:TypeArguments="x:String">[in_TransactionItem("피드백").ToString]</InArgument>
+              </isactr:FieldObject.Value>
+            </isactr:FieldObject>
+            <isactr:FieldObject Name="detectInputLanguage" Type="FieldArgument">
+              <isactr:FieldObject.Value>
+                <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+              </isactr:FieldObject.Value>
+            </isactr:FieldObject>
+            <isactr:FieldObject Name="outputLanguage" Type="FieldArgument" />
+            <isactr:FieldObject Name="maxWordCount" Type="FieldArgument">
+              <isactr:FieldObject.Value>
+                <InArgument x:TypeArguments="x:Int64">10</InArgument>
+              </isactr:FieldObject.Value>
+            </isactr:FieldObject>
+            <isactr:FieldObject Name="summaryFormat" Type="FieldArgument">
+              <isactr:FieldObject.Value>
+                <InArgument x:TypeArguments="x:String">Paragraph</InArgument>
+              </isactr:FieldObject.Value>
+            </isactr:FieldObject>
+            <isactr:FieldObject Name="out_summary" Type="FieldArgument">
+              <isactr:FieldObject.Value>
+                <OutArgument x:TypeArguments="x:String">[strSummary]</OutArgument>
+              </isactr:FieldObject.Value>
+            </isactr:FieldObject>
+            <isactr:FieldObject Name="Jit_summarise" Type="FieldArgument">
+              <isactr:FieldObject.Value>
+                <OutArgument x:TypeArguments="uiascb:summarise_Create" />
+              </isactr:FieldObject.Value>
+            </isactr:FieldObject>
+          </isactr:ConnectorActivity.FieldObjects>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </isactr:ConnectorActivity>
+        <isactr:ConnectorActivity sap2010:Annotation.AnnotationText="strEmailBody = 생성된 이메일 본문 (HTML 형식)" Configuration="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" ConnectionId="4c57a977-b9d1-4acd-9370-383696a586bd" DisplayName="Generate Email" sap:VirtualizedContainerService.HintSize="416,712" sap2010:WorkflowViewState.IdRef="ConnectorActivity_2" UiPathActivityTypeId="c46e5f7f-894c-3074-9f7b-9c162b70e3c9">
+          <isactr:ConnectorActivity.FieldObjects>
+            <isactr:FieldObject Name="need_salutation" Type="FieldArgument">
+              <isactr:FieldObject.Value>
+                <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+              </isactr:FieldObject.Value>
+            </isactr:FieldObject>
+            <isactr:FieldObject Name="salutation_string" Type="FieldArgument">
+              <isactr:FieldObject.Value>
+                <InArgument x:TypeArguments="x:String">"안녕하세요!"</InArgument>
+              </isactr:FieldObject.Value>
+            </isactr:FieldObject>
+            <isactr:FieldObject Name="salutation_name" Type="FieldArgument">
+              <isactr:FieldObject.Value>
+                <InArgument x:TypeArguments="x:String" />
+              </isactr:FieldObject.Value>
+            </isactr:FieldObject>
+            <isactr:FieldObject Name="need_sign_off" Type="FieldArgument">
+              <isactr:FieldObject.Value>
+                <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+              </isactr:FieldObject.Value>
+            </isactr:FieldObject>
+            <isactr:FieldObject Name="sign_off_string" Type="FieldArgument">
+              <isactr:FieldObject.Value>
+                <InArgument x:TypeArguments="x:String">"감사합니다!"</InArgument>
+              </isactr:FieldObject.Value>
+            </isactr:FieldObject>
+            <isactr:FieldObject Name="sign_off_name" Type="FieldArgument">
+              <isactr:FieldObject.Value>
+                <InArgument x:TypeArguments="x:String" />
+              </isactr:FieldObject.Value>
+            </isactr:FieldObject>
+            <isactr:FieldObject Name="email_content" Type="FieldArgument">
+              <isactr:FieldObject.Value>
+                <InArgument x:TypeArguments="x:String" xml:space="preserve">["고객으로부터 불만이나 문의사항 피드백을 받았습니다.\n
+수신인은 고객이 아닌 고객지원팀으로,\n
+고객지원팀이 늦지 않게 고객의 불만이나 문의사항을 해결할 것을 요청하는 메일을 작성합니다.\n
+메일 본문에는 고객명, 제품명, 피드백 요약이 항목으로 나열된 내용이 포함되어야 합니다. \n
+단, 감정 정보는 언급할 수 있지만, 항목 나열에는 포함시켜서는 안됩니다.\n
+또한 마크다운 문법을 사용할 경우 적용되지 않을 수 있으니 사용하지 않아야 합니다.\n
+------
+- 고객명 : "+in_TransactionItem("고객명").ToString.Trim+"\n
+- 제품명 : "+in_TransactionItem("제품명").ToString.Trim+"\n
+- 요약 : "+strSummary+"\n
+\n
+고객 지원팀은 해당 피드백을 검토해 주세요."]</InArgument>
+              </isactr:FieldObject.Value>
+            </isactr:FieldObject>
+            <isactr:FieldObject Name="detectInputLanguage" Type="FieldArgument">
+              <isactr:FieldObject.Value>
+                <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+              </isactr:FieldObject.Value>
+            </isactr:FieldObject>
+            <isactr:FieldObject Name="outputLanguage" Type="FieldArgument" />
+            <isactr:FieldObject Name="total_words" Type="FieldArgument">
+              <isactr:FieldObject.Value>
+                <InArgument x:TypeArguments="x:Int64" />
+              </isactr:FieldObject.Value>
+            </isactr:FieldObject>
+            <isactr:FieldObject Name="style" Type="FieldArgument">
+              <isactr:FieldObject.Value>
+                <InArgument x:TypeArguments="x:String">Concise</InArgument>
+              </isactr:FieldObject.Value>
+            </isactr:FieldObject>
+            <isactr:FieldObject Name="output_format" Type="FieldArgument">
+              <isactr:FieldObject.Value>
+                <InArgument x:TypeArguments="x:String">HTML</InArgument>
+              </isactr:FieldObject.Value>
+            </isactr:FieldObject>
+            <isactr:FieldObject Name="example" Type="FieldArgument">
+              <isactr:FieldObject.Value>
+                <InArgument x:TypeArguments="x:String" />
+              </isactr:FieldObject.Value>
+            </isactr:FieldObject>
+            <isactr:FieldObject Name="out_emailContent" Type="FieldArgument">
+              <isactr:FieldObject.Value>
+                <OutArgument x:TypeArguments="x:String">[strEmailBody]</OutArgument>
+              </isactr:FieldObject.Value>
+            </isactr:FieldObject>
+            <isactr:FieldObject Name="Jit_generateEmail" Type="FieldArgument">
+              <isactr:FieldObject.Value>
+                <OutArgument x:TypeArguments="uiascb1:generateEmail_Create" />
+              </isactr:FieldObject.Value>
+            </isactr:FieldObject>
+          </isactr:ConnectorActivity.FieldObjects>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </isactr:ConnectorActivity>
+      </Sequence>
+      <Sequence sap2010:Annotation.AnnotationText="&quot;불만&quot;으로 분류된 경우 메일 제목에 &quot;[긴급]&quot; 표시&#xD;&#xA;&quot;문의&quot;로 분류된 경우 메일 제목에 &quot;[문의]&quot; 표시" DisplayName="긴급 또는 문의 구분 | Sequence" sap:VirtualizedContainerService.HintSize="486,892.5" sap2010:WorkflowViewState.IdRef="Sequence_5">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <ui:IfElseIfV2 Condition="[in_strCategory.Contains(&quot;불만&quot;)]" DisplayName="Else If" sap:VirtualizedContainerService.HintSize="452,756" sap2010:WorkflowViewState.IdRef="IfElseIfV2_1">
+          <ui:IfElseIfV2.Else>
+            <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="450,90.5" sap2010:WorkflowViewState.IdRef="Sequence_8">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </Sequence>
+          </ui:IfElseIfV2.Else>
+          <ui:IfElseIfV2.ElseIfs>
+            <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
+              <ui:IfElseIfBlock BlockType="ElseIf" Condition="[in_strCategory.Contains(&quot;문의&quot;)]" DisplayName="If else if block" sap2010:WorkflowViewState.IdRef="IfElseIfBlock_2">
+                <ui:IfElseIfBlock.Then>
+                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="450,227" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <Assign sap:VirtualizedContainerService.HintSize="416,167" sap2010:WorkflowViewState.IdRef="Assign_2">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[strSubIn]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">["문의"]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                  </Sequence>
+                </ui:IfElseIfBlock.Then>
+              </ui:IfElseIfBlock>
+            </sc:BindingList>
+          </ui:IfElseIfV2.ElseIfs>
+          <ui:IfElseIfV2.Then>
+            <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="450,227" sap2010:WorkflowViewState.IdRef="Sequence_6">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <Assign sap:VirtualizedContainerService.HintSize="416,167" sap2010:WorkflowViewState.IdRef="Assign_1">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[strSubIn]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">["긴급"]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </Sequence>
+          </ui:IfElseIfV2.Then>
+        </ui:IfElseIfV2>
+      </Sequence>
+      <Sequence DisplayName="메일 발송 | Sequence" sap:VirtualizedContainerService.HintSize="486,525" sap2010:WorkflowViewState.IdRef="Sequence_3">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <ui:GetRobotCredential sap2010:Annotation.AnnotationText="속성 &gt; Username, Password 저장&#xA;strID, sstrPW" AssetName="UiPathGmail" CacheStrategy="None" DisplayName="Get Credential" FolderPath="aizoadream@gmail.com's workspace" sap:VirtualizedContainerService.HintSize="416,221" sap2010:WorkflowViewState.IdRef="GetRobotCredential_1" Password="[sstrPW]" TimeoutMS="{x:Null}" Username="[strID]">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ui:GetRobotCredential>
+        <ui:SendMail sap2010:Annotation.AnnotationText="Subject : &quot;[&quot;+strSubIn+&quot;] &quot;+in_strCategory+&quot; 접수 - &quot;+in_TransactionItem(&quot;고객명&quot;).ToString.Trim" Bcc="{x:Null}" Body="[strEmailBody]" Cc="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Send SMTP Mail Message" Email="[strID]" EnableSSL="True" From="{x:Null}" sap:VirtualizedContainerService.HintSize="416,221" sap2010:WorkflowViewState.IdRef="SendMail_1" IgnoreCRL="False" IsBodyHtml="True" MailMessage="{x:Null}" Name="{x:Null}" Password="{x:Null}" Port="587" ReplyTo="{x:Null}" Result="{x:Null}" SecureConnection="Auto" SecurePassword="[sstrPW]" Server="smtp.gmail.com" Subject="[&quot;[&quot;+strSubIn+&quot;] &quot;+in_strCategory+&quot; 접수 - &quot;+in_TransactionItem(&quot;고객명&quot;).ToString.Trim]" TimeoutMS="{x:Null}" To="[in_Config(&quot;MailTo2&quot;).ToString]" UseOAuth="{x:Null}">
+          <ui:SendMail.Files>
+            <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4" />
+          </ui:SendMail.Files>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ui:SendMail>
+      </Sequence>
+    </Sequence>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="520,167" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;***메일 발송 완료***&quot;]" />
   </Sequence>
 </Activity>
