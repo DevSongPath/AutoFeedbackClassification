@@ -41,6 +41,7 @@
       <x:String>UiPath.Excel.Activities.Business</x:String>
       <x:String>UiPath.Excel.Model</x:String>
       <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.IntegrationService.Activities.SWEntities.C3696A586BD_categorize_Create.Bundle</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -103,9 +104,10 @@
       <AssemblyReference>System.Collections.Immutable</AssemblyReference>
       <AssemblyReference>System.Linq.Parallel</AssemblyReference>
       <AssemblyReference>System.Linq.Queryable</AssemblyReference>
+      <AssemblyReference>C3696A586BD_categori.PY6eQ1mADfS1ZZeMa2wTTKo</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="_00_초기화" sap:VirtualizedContainerService.HintSize="868,2716" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="_00_초기화" sap:VirtualizedContainerService.HintSize="686,2716" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -140,14 +142,14 @@
         </ui:ForEachFileX.Body>
       </ui:ForEachFileX>
     </Sequence>
-    <Sequence sap2010:Annotation.AnnotationText="인풋 엑셀 파일을 아웃풋 엑셀 파일로 복사 → 인풋시트 내용 삭제(헤더 제외) → &#xD;&#xA;인풋시트를 칭찬/불만/문의/기타 시트로 복제 → 인풋시트 삭제" DisplayName="결과파일 생성 | Sequence" sap:VirtualizedContainerService.HintSize="640,1772.5" sap2010:WorkflowViewState.IdRef="Sequence_3">
+    <Sequence sap2010:Annotation.AnnotationText="인풋 엑셀 파일을 아웃풋 엑셀 파일로 복사 → 인풋시트 내용 삭제(헤더 제외) → &#xA;인풋시트를 칭찬/불만/문의/기타 시트로 복제 → 인풋시트 삭제" DisplayName="결과파일 생성 | Sequence" sap:VirtualizedContainerService.HintSize="640,1772.5" sap2010:WorkflowViewState.IdRef="Sequence_3">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:MultipleAssign sap2010:Annotation.AnnotationText="- io_Config(&quot;인풋파일경로&quot;) = Path.Combine(io_Config(&quot;인풋폴더&quot;).ToString, io_Config(&quot;인풋파일명&quot;).ToString)&#xD;&#xA;- io_Config(&quot;아웃풋파일경로&quot;) = Path.Combine(io_Config(&quot;아웃풋폴더&quot;).ToString, io_Config(&quot;결과파일명&quot;).ToString)" DisplayName="인풋/아웃풋 엑셀 파일 경로 변수 저장 | Multiple Assign" sap:VirtualizedContainerService.HintSize="606,258" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+      <ui:MultipleAssign sap2010:Annotation.AnnotationText="- io_Config(&quot;인풋파일경로&quot;) = Path.Combine(io_Config(&quot;인풋폴더&quot;).ToString, io_Config(&quot;인풋파일명&quot;).ToString)&#xA;- io_Config(&quot;아웃풋파일경로&quot;) = Path.Combine(io_Config(&quot;아웃풋폴더&quot;).ToString, io_Config(&quot;결과파일명&quot;).ToString)" DisplayName="인풋/아웃풋 엑셀 파일 경로 변수 저장 | Multiple Assign" sap:VirtualizedContainerService.HintSize="606,258" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
         <ui:MultipleAssign.AssignOperations>
           <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
             <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
