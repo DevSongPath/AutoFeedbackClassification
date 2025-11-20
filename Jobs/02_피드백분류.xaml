@@ -1,6 +1,10 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="_03_피드백분류" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="_03_피드백분류" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:isactr="http://schemas.uipath.com/workflow/integration-service-activities/isactr" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.ComponentModel;assembly=System.ComponentModel.TypeConverter" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uiascb="clr-namespace:UiPath.IntegrationService.Activities.SWEntities.C3696A586BD_categorize_Create.Bundle;assembly=C3696A586BD_categori.PY6eQ1mADfS1ZZeMa2wTTKo" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_TransactionItem" Type="InArgument(sd:DataRow)" />
+    <x:Property Name="io_dtGood" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="io_dtBad" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="io_dtQuestion" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="io_dtElse" Type="InOutArgument(sd:DataTable)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
@@ -35,6 +39,14 @@
       <x:String>System.Linq.Expressions</x:String>
       <x:String>System.Runtime.Serialization</x:String>
       <x:String>System.Reflection</x:String>
+      <x:String>UiPath.IntegrationService.Activities.Runtime.Models.FilterBuilder</x:String>
+      <x:String>UiPath.IntegrationService.Activities.Runtime.Models</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>UiPath.IntegrationService.Activities.Runtime.Helpers.TypeDetailsCustomization</x:String>
+      <x:String>UiPath.IntegrationService.Activities.Runtime.Activities</x:String>
+      <x:String>UiPath.Platform.Activities</x:String>
+      <x:String>UiPath.IntegrationService.Activities.SWEntities.C3696A586BD_categorize_Create.Bundle</x:String>
+      <x:String>System.Xml.Serialization</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -82,25 +94,36 @@
       <AssemblyReference>System.Collections</AssemblyReference>
       <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
       <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>UiPath.IntegrationService.Activities.Runtime</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>C3696A586BD_categori.PY6eQ1mADfS1ZZeMa2wTTKo</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="_02_피드백분류" sap:VirtualizedContainerService.HintSize="686,625" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="_02_피드백분류" sap:VirtualizedContainerService.HintSize="686,852" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="strCategory" />
+      <Variable x:TypeArguments="x:String" Name="strFeedback" />
+    </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="450,176" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;***피드백분류 시작***&quot;]" />
-    <Sequence DisplayName="피드백 분류 | Sequence" sap:VirtualizedContainerService.HintSize="450,259" sap2010:WorkflowViewState.IdRef="Sequence_2">
-      <Sequence.Variables>
-        <Variable x:TypeArguments="x:String" Name="strFeedback" />
-      </Sequence.Variables>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="512,176" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;***피드백분류 시작***&quot;]" />
+    <Sequence sap2010:Annotation.AnnotationText="AI 기반 피드백 자동 분류" DisplayName="피드백 분류 | Sequence" sap:VirtualizedContainerService.HintSize="512,88" sap2010:WorkflowViewState.IdRef="Sequence_2">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <Assign sap:VirtualizedContainerService.HintSize="416,167" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign DisplayName="피드백 저장 | Assign" sap:VirtualizedContainerService.HintSize="416,176" sap2010:WorkflowViewState.IdRef="Assign_1">
         <Assign.To>
           <OutArgument x:TypeArguments="x:String">[strFeedback]</OutArgument>
         </Assign.To>
@@ -108,7 +131,170 @@
           <InArgument x:TypeArguments="x:String">[in_TransactionItem("피드백").ToString]</InArgument>
         </Assign.Value>
       </Assign>
+      <isactr:ConnectorActivity sap2010:Annotation.AnnotationText="칭찬/불만/문의/기타로 분류 후&#xD;&#xA;strCategory에 저장" Configuration="H4sIAAAAAAAACpVVbXPSQBD+Kzf5HGNbp2gZ60xJ1WJbiYLtWKfTOZIFTpK7eC+0yOS/u5cckPDSjsMHuH1/dvdZFt4nBmmiQsE1ZRyk1154faAyntBhCpXSa/+6970uz41eCRbeV5qB1/Zi9ASuPd87ZypP6dzJw7UcVCxZrpngKB9MgDgfogWJqYaxkOwvBGQwYYpkRmkyBJJLMWMJJIQqQonSkvFxgNEG89yGrwT47gupezKxlR+XudgY0yy8SCjmUkaSZVTOvcL3voPKBVcYQUsD9v3HMAnJ8l3iuxJYVeXaEYn1W6N15YLaBtxQNTA3VA6AGP6GWDcBtLAAITOqUZ+w2Hpj3e8rrH719aGMPqIm1Tc0NRhqUbyA28dhZAjbjqONVS8DlxCWj1uWjAH1C++W8UQ8DphOt2BVqia4qBrUapKlYShSk/FLmG+Emdd1zTi2jUSMiLYLssP6gpXlP2tWdmSZsh6+YdDMW3s9H9cV8Jx9Ufz/SiWNMps7tZGrxrUGhP4Ed4gkOwpzRBsCbk6Na0lACG4agSea5Sn4lm2JiTVRJs9tLM3iKWjlkxjpKDKQRMKMwSNKQMcv8PDtyzzc2RTf6/GQ8hlVVe8KvDo9o3eenS9MP6zx7CVjpWo0a137DxZRPQm62KOxLCvpg5yxGIIzZMUMywYV9G8/cl39DN+0Tlpnx+9anfNa7odQAj6CjuFJCsGWwie7/ILoZwu+HWZn56P+4d0dXNOjx8HgUvjkBqTCUk4PgwP7QXekupFwysFoSVOfRGaYstiSS0yBn3KTpl61d6BwQ0c0VbB96jZbXnV2q+l46BU2t7R2Y9g6f/N9177OnO2zz/gIJDJjZbWxpju2arVHxcsAl+/Q4DD3828P7uIeU3S50pTHEFGJuDROwq6wmwj6ljMprwLneL2FxCGg2LAcF+mV+6JMJlM0cks0d5iWZWHi8vRv/KOUm3qhdX4NeiKwesscbblia08taZcBd+14SOMJIEwxNXl5rWzlxVLekeJRgexqyJzccRHrd3/vEY2ndAx1rEeHTbAub0Ub8hn4WZesmVK3rEdpHQQnK9DPsHR/V3o5VPS0LiWntlrV6w9QZuvC1+uG9xXlY4PIUAH2wl7TpwiffattHx0cYCiqOhh2iisXTtDa9s7t2ACedCcV8bTsUvEPoRHacS8JAAA=" ConnectionId="4c57a977-b9d1-4acd-9370-383696a586bd" DisplayName="AI 기반 피드백 분류 | Categorize" sap:VirtualizedContainerService.HintSize="416,358" sap2010:WorkflowViewState.IdRef="ConnectorActivity_2" UiPathActivityTypeId="f6c9a20f-7e4c-3114-977f-69cc35299639">
+        <isactr:ConnectorActivity.FieldObjects>
+          <isactr:FieldObject Name="content" Type="FieldArgument">
+            <isactr:FieldObject.Value>
+              <InArgument x:TypeArguments="x:String">[strFeedback]</InArgument>
+            </isactr:FieldObject.Value>
+          </isactr:FieldObject>
+          <isactr:FieldObject Name="categories" Type="FieldArgument">
+            <isactr:FieldObject.Value>
+              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)">[new System.Collections.Generic.Dictionary(Of System.String, System.String) From { { "칭찬", "서비스에 대한 긍정적인 리뷰입니다." },{ "불만", "서비스에 대한 부정적인 리뷰입니다." },{ "문의", "서비스에 대해 궁금한 점이 있습니다." },{ "기타", "칭찬, 불만, 문의 이외의 내용입니다." } }]</InArgument>
+            </isactr:FieldObject.Value>
+          </isactr:FieldObject>
+          <isactr:FieldObject Name="description" Type="FieldArgument">
+            <isactr:FieldObject.Value>
+              <InArgument x:TypeArguments="x:String" xml:space="preserve">제품 구입에 대한 리뷰입니다. \n
+사용자에 따라 긍정적인 반응을 보일 경우 '칭찬',\n
+부정적인 반응을 보일 경우 '불만'입니다.\n
+제품에 대해 궁금한 점이나 추가 정보를 요청하는 경우 '문의'이며, \n
+그 외의 경우에는 '기타'로 분류됩니다.</InArgument>
+            </isactr:FieldObject.Value>
+          </isactr:FieldObject>
+          <isactr:FieldObject Name="Jit_categorize" Type="FieldArgument">
+            <isactr:FieldObject.Value>
+              <OutArgument x:TypeArguments="uiascb:categorize_Create" />
+            </isactr:FieldObject.Value>
+          </isactr:FieldObject>
+          <isactr:FieldObject Name="out_category" Type="FieldArgument">
+            <isactr:FieldObject.Value>
+              <OutArgument x:TypeArguments="x:String">[strCategory]</OutArgument>
+            </isactr:FieldObject.Value>
+          </isactr:FieldObject>
+        </isactr:ConnectorActivity.FieldObjects>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </isactr:ConnectorActivity>
     </Sequence>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="450,167" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;***피드백분류 종료***&quot;]" />
+    <Sequence sap2010:Annotation.AnnotationText="- 피드백 분류 결과가 없다면 BRE 발생&#xD;&#xA;- 피드백 분류 결과가 있다면 해당 DT에 데이터(행)를 추가하고,&#xD;&#xA;  &quot;불만&quot; 또는 &quot;문의&quot;로 분류된 경우 고객지원팀에 메일 발송&#xD;&#xA;" DisplayName="해당 DT에 저장 및 메일 발송 | Sequence" sap:VirtualizedContainerService.HintSize="512,134.5" sap2010:WorkflowViewState.IdRef="Sequence_3">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <If Condition="[String.IsNullOrEmpty(strCategory)]" sap:VirtualizedContainerService.HintSize="488,2088.5" sap2010:WorkflowViewState.IdRef="If_1">
+        <If.Then>
+          <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="486,205.5" sap2010:WorkflowViewState.IdRef="Sequence_4">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Throw sap2010:Annotation.AnnotationText="분류 결과가 없다면 BRE 발생" Exception="[New BusinessRuleException(&quot;분류 실패&quot;)]" sap:VirtualizedContainerService.HintSize="452,145.5" sap2010:WorkflowViewState.IdRef="Throw_1">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </Throw>
+          </Sequence>
+        </If.Then>
+        <If.Else>
+          <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="486,1752.5" sap2010:WorkflowViewState.IdRef="Sequence_5">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:IfElseIfV2 Condition="[strCategory.Contains(&quot;칭찬&quot;)]" DisplayName="Else If" sap:VirtualizedContainerService.HintSize="452,1692.5" sap2010:WorkflowViewState.IdRef="IfElseIfV2_1">
+              <ui:IfElseIfV2.Else>
+                <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="450,273.5" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[in_TransactionItem.ItemArray]" DataTable="[io_dtElse]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="416,213.5" sap2010:WorkflowViewState.IdRef="AddDataRow_4" />
+                </Sequence>
+              </ui:IfElseIfV2.Else>
+              <ui:IfElseIfV2.ElseIfs>
+                <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
+                  <ui:IfElseIfBlock BlockType="ElseIf" Condition="[strCategory.Contains(&quot;불만&quot;)]" DisplayName="If else if block" sap2010:WorkflowViewState.IdRef="IfElseIfBlock_2">
+                    <ui:IfElseIfBlock.Then>
+                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="450,450.5" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[in_TransactionItem.ItemArray]" DataTable="[io_dtBad]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="416,222.5" sap2010:WorkflowViewState.IdRef="AddDataRow_2" />
+                        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="03_메일발송 - Invoke Workflow File (Jobs\03_메일발송.xaml)" sap:VirtualizedContainerService.HintSize="416,168" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Jobs\03_메일발송.xaml">
+                          <ui:InvokeWorkflowFile.Arguments>
+                            <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                          </ui:InvokeWorkflowFile.Arguments>
+                        </ui:InvokeWorkflowFile>
+                      </Sequence>
+                    </ui:IfElseIfBlock.Then>
+                  </ui:IfElseIfBlock>
+                  <ui:IfElseIfBlock BlockType="ElseIf" Condition="[strCategory.Contains(&quot;문의&quot;)]" DisplayName="If else if block" sap2010:WorkflowViewState.IdRef="IfElseIfBlock_4">
+                    <ui:IfElseIfBlock.Then>
+                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="450,450.5" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[in_TransactionItem.ItemArray]" DataTable="[io_dtQuestion]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="416,222.5" sap2010:WorkflowViewState.IdRef="AddDataRow_3" />
+                        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="03_메일발송 - Invoke Workflow File (Jobs\03_메일발송.xaml)" sap:VirtualizedContainerService.HintSize="416,168" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Jobs\03_메일발송.xaml">
+                          <ui:InvokeWorkflowFile.Arguments>
+                            <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                          </ui:InvokeWorkflowFile.Arguments>
+                        </ui:InvokeWorkflowFile>
+                      </Sequence>
+                    </ui:IfElseIfBlock.Then>
+                  </ui:IfElseIfBlock>
+                </sc:BindingList>
+              </ui:IfElseIfV2.ElseIfs>
+              <ui:IfElseIfV2.Then>
+                <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="450,273.5" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[in_TransactionItem.ItemArray]" DataTable="[io_dtGood]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="416,213.5" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
+                </Sequence>
+              </ui:IfElseIfV2.Then>
+            </ui:IfElseIfV2>
+          </Sequence>
+        </If.Else>
+      </If>
+    </Sequence>
+    <Sequence DisplayName="반복 사용 변수 초기화 | Sequence" sap:VirtualizedContainerService.HintSize="512,263.5" sap2010:WorkflowViewState.IdRef="Sequence_10">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="478,171.5" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+        <ui:MultipleAssign.AssignOperations>
+          <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[strFeedback]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">[String.Empty]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[strCategory]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">[String.Empty]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+          </scg:List>
+        </ui:MultipleAssign.AssignOperations>
+      </ui:MultipleAssign>
+    </Sequence>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="512,167" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;***피드백분류 종료***&quot;]" />
   </Sequence>
 </Activity>
