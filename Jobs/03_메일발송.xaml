@@ -119,7 +119,7 @@
       <AssemblyReference>UiPath.Mail.Activities.Design</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="_03_메일발송" sap:VirtualizedContainerService.HintSize="684,3077.5" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="_03_메일발송" sap:VirtualizedContainerService.HintSize="684,3350" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="strSubIn" />
       <Variable x:TypeArguments="x:String" Name="strID" />
@@ -133,13 +133,49 @@
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="520,176" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[in_strCategory+&quot; 접수!!! 메일 발송 시작&quot;]" />
-    <Sequence sap2010:Annotation.AnnotationText="&quot;불만&quot; 또는 &quot;문의&quot;로 분류된 경우 ,&#xD;&#xA;AI 기반 피드백 요약 및 AI 기반 메일 본문 생성 후 메일 발송" sap:VirtualizedContainerService.HintSize="520,2711.5" sap2010:WorkflowViewState.IdRef="Sequence_4">
+    <Sequence sap2010:Annotation.AnnotationText="&quot;불만&quot; 또는 &quot;문의&quot;로 분류된 경우 ,&#xD;&#xA;AI 기반 피드백 요약 및 AI 기반 메일 본문 생성 후 메일 발송" DisplayName="메일 발송 | Sequence" sap:VirtualizedContainerService.HintSize="520,2984" sap2010:WorkflowViewState.IdRef="Sequence_4">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
+      <ui:MultipleAssign sap2010:Annotation.AnnotationText="- strSummary : AI 기반으로 요약된 피드백 내용 저장&#xD;&#xA;- strEmailBody : AI 기반으로 생성된 메일 본문 저장&#xD;&#xA;- strSubIn : 메일 제목 강조 사항 저장 (&quot;긴급&quot; 또는 &quot;문의&quot;)" DisplayName="변수 선언 | Multiple Assign" sap:VirtualizedContainerService.HintSize="486,272.5" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+        <ui:MultipleAssign.AssignOperations>
+          <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[strSummary]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">[String.Empty]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[strEmailBody]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">[String.Empty]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_6">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[strSubIn]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">[String.Empty]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+          </scg:List>
+        </ui:MultipleAssign.AssignOperations>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:MultipleAssign>
       <Sequence DisplayName="메일 본문 생성 | Sequence" sap:VirtualizedContainerService.HintSize="486,1157.5" sap2010:WorkflowViewState.IdRef="Sequence_2">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -186,7 +222,7 @@
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
         </isactr:ConnectorActivity>
-        <isactr:ConnectorActivity sap2010:Annotation.AnnotationText="strEmailBody = 생성된 이메일 본문 (HTML 형식)" Configuration="H4sIAAAAAAAACu1b/27bOBJ+FUJ/7QFZX9If2bZA/4idtPE2aYzYaXE4FAEt0RZjmvRSVBynyOPck+yL7UdKtkXKjtOmvfb2DDSwNRwOZ74ZDocj93P0hjORZC0lDeWS6ejV56jLqI5T2hesGIxe/fvTTtSWk9wsCJ+j93TMoleRZCy5zKjIDTVcyWgnOuTZRNBZOd6WscgTRnwWlsWaT9zTKhbCB8QKZgmYe7OJFdRXSjBqZ3eVNmc6scru7URHMh87hT5gOhiNztndzuJxQEXG7j65NfkQy32OOirj5dIdzcdUz6K7neicZRMls1KCff4j5xoalM/O9BMVFza8ipoqmUGZduYGDmJL7lDNpFnqUGKwNOwyM5rLYQ2l7np0rPmEkjjPjBpXMVKa5JkduraWEi6JSRlJtJokaiqXwC2WrOD2pI5bdMyEUEBiSXmrGTOYm3nUQ4RH5CN6omjSnB2yAc1Fab5dwIbQRcb02TXTmicLaCuIFbFUfC/17aZqCm3Pc8GK0XM2cDPWRlw7ayE0nK+cuy3lo9KjgVDTo5uJZlnmsCwH5/KcQXYJq9Wnu0/WSE+TY6vz12pSmPplijj6Kk0WwfhT4HLmYpOKH4MNIm/1Dt6G1TasHhVWD0r5q/O6tJT1WZ3Mx73UbtmIUS6NT7lJq9l9WObe+/P4041ZeLsptvnke6biTXukWBwReqkGg/XVIRh+LRlW14Ylw4Mrw2f/G5VhCczaunAdLkFVOEfnMTXh8xU14XslmVf8nbMh1bgBVGldLmOmmZh51H+pXGcE9gb0XkrliMxU7lFbKWP6Z6wzl5H7Y6vMlXr8oBrz+2Py8Arz2+PyXevLbTj9H4bTF9eV81NhdVU5T/Yra8oe8r0s68rFsWCLy8b92X9/m2f/Lnn259gAbs42qW5j51vEzqaMGWuGoWtuZrV02fKGarmyKJTVwBXKSzFkQGODahr/MjqeCORLYth4wjQ1uZ7f2hvkmA9TpgspGRnjGpI5SWOVMIG8KwQxdGSfMUnzbJRV8jCq7T5yr5eHX8BYpccU5W2UqByVrVPbVbxlZbzb2K0k67vN6BhlqLicKlu4h/D07BhZjHn4HEwmWt2g/jE4U5yuFijHawHQDFDIBmnjKFKGTNQkF2BNdqrWJ8wwPcarBUKttInmVppgcmjSJRJcGjYModjbq2ABjv1n0ZrLWpfFSiZrrmtrrmdnskXlNc1qdzI2plxcQqCxN7YQryM7SiqjtYgqxyxCvLy9lvcwJ7lBeinPSJaqXCSkD1yAUhl/JrXddnxQQ8a42tnhUkbiC7n/MN97/pBb7RcWJWYmVhQjc2oNBsfv4kVjdbt9FFG5wUukTcrvhwEf4fVUzOHRyg11vrsXIyFvRfUP2NJJhaV4rjAcCfVHXvhzzrMgVdg6uKLmNOPX1fUqxArrR25cwplzFc8VhpOZ5rE7kOcsc0qF6Y3IPcWL56ri185hnkJLWoWxqyaIOoMFsEErzD69KlkO6bDwzULwnPSoS/k9d6sv2KRFJF0OivQQRuWZGyXL0Vp0JlAfwV+y2A+3uYYM70AtFMU2e2DA/lYL2I7A21QcGDdmRcx6gytmVMw87p2eVJjc40NaVl+V81r3prwC03szXpnFCujoAIkf/R+ciDgVwLwJxRf+oVbvuhXPrdw56KFpi93Y47ueuI6WdM+ekm5tobI0BZkLQRKnZU6jMgEJjbH77Xn57d1kD9PYuDfxJ1QOczqsG3boeIgox11oF2Fcs7VktT5bsHMr3JnIcGmEB4tTvuLYubfL8wjlUWU6FqMk4YMBGoLgmdM3NGuf7IY7qHDu5sP+Eb3XApS1OJY5pGKBD958IkE566yNq1i7PjWKogVCNCug3fBefsUPGqKDgeYjin3ktUcPxinFgeHTNO2HpMwuX56HC+It033Kr6jkHr2ZC7R3OdzjUVGsURFwqkyGfC2KUjKk3bI49Sgfmch8yiHUCEhvUTMGkuyPEUYeBeeRCCd2J3VhR+iR15Rt0gznu0eyJ3nI9obLmrw31tk+qa1rFgCxOJT2Nr+iyF4+lMesr9nUJ3GZ+EwtrTAvEHecyxXuOtBjVjO3DdfUaDJBFquZ/DsFhmHEvGVKD0POd/SWjnyz36VjxLHPJCVNqE/DbSiUlesEGJJf8AWuv+L/8Idneji79Ugn1P+1ygnyVQ7vB4JPqLkOaaeI0yHN/BcTpzRmAGQV7wx/Y5+q5FDVED213k15fX6wy+ChAN/3bBJuscMcR47PpPSUWS+QX5pqNP7zP8IH6SzhPs6dXF4hI/g0qB3EaodmqfHB7CAn5UPcaRnW0vSWB0tVx4vvNOA4V3BjCNB5jpt/QOsKdU1HNVI9hruQGGB0IPr1RbpIbjXaFDYEFGYDLuRKebBEj4658ClMwPTwpVYwK9ejUPrFbJjm/ua4GGmUfaGyFzrxxV/c9oPc94EzY9u8QRi1cIF0tB/32mx1jfLYzv7abuqmt2cb1fna/tTXtnb/y/g8pPP7XTHyX6fVi7dtoG0D7VsF2urLIAaKYr7+6+W/z713oebay+Pv3FzO+xvOtJrBb8tRshj2TF7accE7qHMabdu1tfWskjhzr3nMGnY3o3/OWdbofjySpvjaerr/cv/g+Yv95qGvwqXrzrNGM5eJYI1VYztk1eyGfpnIq73Bbp4d7k3Hu3H87Lh3k+ZPd8gHW8Yr+XqvgUY5WuWkhVMPPfvXkuVwi9ghHbTVefyOzXpqxORrmQuXHpG8WWYqgXZ/H3kN4jZ8AbXjLn2ArIxiOzMUd0RcRgE2QgTsOLcLXSHNaQthCEaJZKw01AM55xMg/Wv5QblORmAqUZ6V7piHBlTpX2Fy6c7Q2cfGTE6ZSRX0sjnZdppQG6DnyG9ZMpe5LhZaNE4Z7FejfDLfezZeC3pTqylKiTbekZT0ss0BM8r/QNCh8QgnS9XkJ3u+zeXaRXgRqHDQJsuIqnJWpezvNl4ubN8Q0fcCdOZe7xRii+CroXbW7YFm1cPTP0MBi9MTmcW2OE7pTQePXeBrmxzochzTrAnJI6SBFn4INbQolvHWQ++vKVQ8cnjd/QUKHhkMmzEAAA==" ConnectionId="4c57a977-b9d1-4acd-9370-383696a586bd" DisplayName="Generate Email" sap:VirtualizedContainerService.HintSize="416,712" sap2010:WorkflowViewState.IdRef="ConnectorActivity_2" UiPathActivityTypeId="c46e5f7f-894c-3074-9f7b-9c162b70e3c9">
+        <isactr:ConnectorActivity sap2010:Annotation.AnnotationText="strEmailBody = 생성된 메일 본문 (HTML 형식)" Configuration="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" ConnectionId="4c57a977-b9d1-4acd-9370-383696a586bd" DisplayName="Generate Email" sap:VirtualizedContainerService.HintSize="416,712" sap2010:WorkflowViewState.IdRef="ConnectorActivity_2" UiPathActivityTypeId="c46e5f7f-894c-3074-9f7b-9c162b70e3c9">
           <isactr:ConnectorActivity.FieldObjects>
             <isactr:FieldObject Name="need_salutation" Type="FieldArgument">
               <isactr:FieldObject.Value>
@@ -278,7 +314,7 @@
           </sap:WorkflowViewStateService.ViewState>
         </isactr:ConnectorActivity>
       </Sequence>
-      <Sequence sap2010:Annotation.AnnotationText="&quot;불만&quot;으로 분류된 경우 메일 제목에 &quot;[긴급]&quot; 표시&#xD;&#xA;&quot;문의&quot;로 분류된 경우 메일 제목에 &quot;[문의]&quot; 표시" DisplayName="긴급 또는 문의 구분 | Sequence" sap:VirtualizedContainerService.HintSize="486,892.5" sap2010:WorkflowViewState.IdRef="Sequence_5">
+      <Sequence sap2010:Annotation.AnnotationText="&quot;불만&quot;으로 분류된 경우 메일 제목에 &quot;[긴급]&quot; 표시,&#xD;&#xA;&quot;문의&quot;로 분류된 경우 메일 제목에 &quot;[문의]&quot; 표시하기 위한 구분" DisplayName="긴급 또는 문의 구분 | Sequence" sap:VirtualizedContainerService.HintSize="486,892.5" sap2010:WorkflowViewState.IdRef="Sequence_5">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
